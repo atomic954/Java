@@ -16,3 +16,7 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+## Project Reference
+
+This project is from https://hackr.io/blog/how-to-build-a-java-chat-app#step-1-setting-up-the-project some code has been updated based on the debugger used in VS Code. None of this code was created by me and i'm using this as a learning project. 
