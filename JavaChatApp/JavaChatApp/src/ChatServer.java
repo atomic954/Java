@@ -3,7 +3,6 @@ import java.net.*;
 import java.util.*;
 
 public class ChatServer {
-  // List to keep track of all connected clients
   private static final List<ClientHandler> clients = new ArrayList<>();
 
   public static void main(String[] args) throws IOException {
@@ -14,7 +13,6 @@ public class ChatServer {
               Socket clientSocket = serverSocket.accept();
               System.out.println("Client connected: " + clientSocket);
 
-              // Spawn a new thread for each client
               ClientHandler clientThread = new ClientHandler(clientSocket, clients);
               clients.add(clientThread);
               new Thread(clientThread).start();
@@ -37,11 +35,10 @@ class ClientHandler implements Runnable {
   }
 
   @Override
-    public void run() {
+  public void run() {
       try {
           String inputLine;
           while ((inputLine = in.readLine()) != null) {
-              // Broadcast message to all clients
               for (ClientHandler aClient : clients) {
                   aClient.out.println(inputLine);
               }

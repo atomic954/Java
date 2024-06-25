@@ -1,15 +1,12 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 import java.util.function.Consumer;
 
 public class ChatClient {
-  private final Socket socket;
-  private final BufferedReader in;
-  private final PrintWriter out;
-  private final Consumer<String> onMessageReceived;
+  private Socket socket;
+  private BufferedReader in;
+  private PrintWriter out;
+  private Consumer<String> onMessageReceived;
 
   public ChatClient(String serverAddress, int serverPort, Consumer<String> onMessageReceived) throws IOException {
       this.socket = new Socket(serverAddress, serverPort);
@@ -17,6 +14,10 @@ public class ChatClient {
       this.out = new PrintWriter(socket.getOutputStream(), true);
       this.onMessageReceived = onMessageReceived;
   }
+
+    public ChatClient(Socket socket) {
+        this.socket = socket;
+    }
 
   public void sendMessage(String msg) {
       out.println(msg);
@@ -33,4 +34,12 @@ public class ChatClient {
           }
       }).start();
   }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
 }
